@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Registration Complete</h1>
+    <p class="subtitle">Your stored information is shown below.</p>
+
+    <div class="profile-card">
+        <div class="row"><span>Username</span><strong>{{ user['username'] }}</strong></div>
+        <div class="row"><span>First name</span><strong>{{ user['firstname'] }}</strong></div>
+        <div class="row"><span>Last name</span><strong>{{ user['lastname'] }}</strong></div>
+        <div class="row"><span>Email</span><strong>{{ user['email'] }}</strong></div>
+        <div class="row"><span>Address</span><strong>{{ user['address'] }}</strong></div>
+    </div>
+
+    <div class="file-card">
+        <h2>Uploaded File</h2>
+        {% if user['stored_filename'] %}
+            <p><strong>File:</strong> {{ user['original_filename'] }}</p>
+            <p><strong>Word count:</strong> {{ user['word_count'] }}</p>
+            <a class="button-link" href="{{ url_for('download_file', username=user['username']) }}">Download File</a>
+        {% else %}
+            <p>No file was uploaded during registration.</p>
+        {% endif %}
+    </div>
+
+    <div class="actions">
+        <a href="{{ url_for('login') }}">Re-login</a>
+        <a href="{{ url_for('register') }}">Register another user</a>
+    </div>
+</div>
+</body>
+</html>

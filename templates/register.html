@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Create Account</h1>
+    <p class="subtitle">Register and upload your Limerick text file.</p>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('register') }}" enctype="multipart/form-data">
+        <label>Username</label>
+        <input type="text" name="username" required>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <div class="two-column">
+            <div>
+                <label>First Name</label>
+                <input type="text" name="firstname" required>
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input type="text" name="lastname" required>
+            </div>
+        </div>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Address</label>
+        <textarea name="address" rows="3" required></textarea>
+
+        <label>Upload Limerick (.txt)</label>
+        <input type="file" name="file" accept=".txt">
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p class="footer-text">Already registered? <a href="{{ url_for('login') }}">Log in here</a>.</p>
+</div>
+</body>
+</html>
